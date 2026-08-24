@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="archlinux"
-iso_label="ARCH_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y%m)"
-iso_publisher="Arch Linux <https://archlinux.org>"
-iso_application="Arch Linux Live/Rescue DVD"
+iso_name="larch"
+iso_label="LARCH_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y%m)"
+iso_publisher="Anish Araz <https://github.com/larch-os/larch>"
+iso_application="Larch Live/Install Medium"
 iso_version="$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)"
-install_dir="arch"
+install_dir="larch"
 buildmodes=('iso')
 bootmodes=('bios.syslinux'
            'uefi.systemd-boot')

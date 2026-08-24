@@ -1,0 +1,11 @@
+NAME="Larch"
+PRETTY_NAME="Larch Linux"
+ID=larch
+ID_LIKE=arch
+BUILD_ID=rolling
+ANSI_COLOR="38;2;28;103;252"
+HOME_URL="https://github.com/larch-os/larch"
+DOCUMENTATION_URL="https://wiki.archlinux.org/"
+SUPPORT_URL="https://github.com/larch-os/larch/discussions"
+BUG_REPORT_URL="https://github.com/larch-os/larch/issues"
+LOGO=larch-logo
