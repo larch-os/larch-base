@@ -1,0 +1,53 @@
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="nwg-look"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"org\.kde\.dolphin$"#
+    open-floating true
+}
+
+window-rule {
+    match app-id="com.gabm.satty"
+    open-floating true
+    open-fullscreen false
+    default-column-width { fixed 1100; }
+    default-window-height { fixed 600; }
+}
+
+window-rule {
+    match app-id="kitty"
+    open-floating true
+    default-column-width { fixed 1100; }
+    default-window-height { fixed 600; }
+}
+
+
+window-rule {
+    geometry-corner-radius 15
+    clip-to-geometry true
+}
+
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
+
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
+
+blur {
+  passes 2        // more passes = stronger blur (default: 3)
+  offset 3.0      // sample distance per pass (default: 3.0)
+  noise 0.03      // grain overlay (default: 0.02)
+  saturation 1.0  // color saturation boost (default: 1.5)
+}

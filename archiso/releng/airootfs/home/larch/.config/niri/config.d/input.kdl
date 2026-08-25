@@ -1,0 +1,27 @@
+
+input {
+    disable-power-key-handling
+    keyboard {
+        xkb {
+        }
+        numlock
+    }
+
+    // focus-follows-mouse
+    // warp-mouse-to-focus mode="center-xy"
+
+    touchpad {
+        tap
+        dwt
+        drag true
+        // drag-lock
+        natural-scroll
+        accel-speed 0.5
+    }
+
+    mouse {
+    }
+
+    trackpoint {
+    }
+}

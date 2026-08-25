@@ -3,7 +3,7 @@ Welcome to [1;38;2;28;103;252mLarch[0m - Arch based linux distro for lazy yet 
 To install, follow the Arch Linux installation guide (Larch is Arch under the hood):
 https://wiki.archlinux.org/title/Installation_guide
 
-For Wi-Fi, authenticate to the wireless network using the [35miwctl[0m utility.
+For Wi-Fi, authenticate to the wireless network using the [35mnmtui[0m utility.
 For mobile broadband (WWAN) modems, connect with the [35mmmcli[0m utility.
 Ethernet, WLAN and WWAN interfaces using DHCP should work automatically.
 
