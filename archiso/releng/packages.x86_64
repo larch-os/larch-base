@@ -44,7 +44,6 @@ gpart
 gpm
 gptfdisk
 grim
-grml-zsh-config
 grub
 gtk-update-icon-cache
 hdparm
@@ -136,6 +135,9 @@ testdisk
 tmux
 tpm2-tools
 tpm2-tss
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-common
+ttf-nerd-fonts-symbols-mono
 udftools
 usb_modeswitch
 usbmuxd
