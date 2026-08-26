@@ -1,0 +1,12 @@
+[submodule "archiso/releng/airootfs/home/larch/.oh-my-zsh"]
+	path = archiso/releng/airootfs/home/larch/.oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "vendor/zsh-plugins/zsh-autosuggestions"]
+	path = vendor/zsh-plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "vendor/zsh-plugins/zsh-syntax-highlighting"]
+	path = vendor/zsh-plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "vendor/zsh-plugins/fzf-tab"]
+	path = vendor/zsh-plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab.git

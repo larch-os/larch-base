@@ -17,12 +17,20 @@ docs/             design notes
 
 ## Building the ISO
 
-Requires `archiso`, `git`, and `base-devel` installed on an Arch host (or run inside an Arch container).
+Requires `archiso`, `git`, `rsync`, and `base-devel` installed on an Arch host (or run inside an Arch container).
+
+oh-my-zsh and its custom plugins (`zsh-autosuggestions`, `zsh-syntax-highlighting`, `fzf-tab`) are git submodules rather than vendored files, so clone with `--recurse-submodules` (or run `git submodule update --init --recursive` afterward):
 
 ```sh
-./scripts/build-local-repo.sh          # once, and whenever the AUR packages need bumping
+git clone --recurse-submodules git@github.com:larch-os/larch.git
+```
+
+```sh
+./scripts/build-local-repo.sh          # once, and whenever the AUR packages/submodules need bumping
 sudo mkarchiso -v -o out/ archiso/releng
 ```
+
+`scripts/build-local-repo.sh` checks out the submodules and copies the plugins into place, in addition to building the AUR packages. If it's skipped, `mkarchiso` fails loudly during the build rather than shipping an empty `.oh-my-zsh` directory.
 
 Output lands in `out/larch-<date>-x86_64.iso`.
 

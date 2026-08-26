@@ -32,11 +32,13 @@ efibootmgr
 espeakup
 ethtool
 exfatprogs
+eza
 f2fs-tools
 fatresize
 firefox
 foot-terminfo
 fsarchiver
+fzf
 ghostty-terminfo
 gpart
 gpm
@@ -150,4 +152,5 @@ xdg-utils
 xfsprogs
 xl2tpd
 xsettingsd
+zoxide
 zsh
