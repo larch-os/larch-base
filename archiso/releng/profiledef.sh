@@ -3,7 +3,7 @@
 
 iso_name="larch"
 iso_label="LARCH_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y%m)"
-iso_publisher="Anish Araz <https://github.com/larch-os/larch>"
+iso_publisher="Anish Araz <https://github.com/larch-os/larch-base>"
 iso_application="Larch Live/Install Medium"
 iso_version="$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)"
 install_dir="larch"

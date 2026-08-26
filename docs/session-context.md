@@ -34,7 +34,7 @@ daily-driver machine, not something designed from scratch.
   `Server=` line works from any checkout location, on any machine).
 
 Everything above is committed and pushed to `origin/main`
-(`git@github.com:larch-os/larch.git`). The most recent build,
+(`git@github.com:larch-os/larch-base.git`). The most recent build,
 `larch-2026.08.26-x86_64.iso`, was tested in a libvirt VM with GPU
 passthrough and confirmed working.
 
