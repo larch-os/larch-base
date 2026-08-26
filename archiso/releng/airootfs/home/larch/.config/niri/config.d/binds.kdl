@@ -6,7 +6,7 @@ binds {
     Alt+W { spawn-sh "noctalia msg window-switcher"; }
     F9 { spawn-sh "noctalia msg bar-toggle"; }
     Mod+v { spawn-sh "noctalia msg panel-toggle clipboard"; }
-    Mod+Shift+w { spawn-sh "noctalia msg wallpaper-random eDP-1"; }
+    Mod+Shift+w { spawn-sh "noctalia msg wallpaper-random"; }
     Ctrl+Alt+Space { spawn-sh "noctalia msg window-switcher"; }
     Ctrl+Shift+Print { spawn-sh "~/.config/myscripts/screenshot.sh"; }
 

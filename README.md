@@ -65,7 +65,6 @@ Give the VM at least 4GB RAM and 4 vCPUs. Default templates hand out 1GB/2 vCPUs
 
 A few VM-only quirks worth knowing, not bugs to fix:
 
-- The virtual display shows up as `Virtual-1`, not `eDP-1`/`HDMI-A-1`, so niri's per-output config doesn't match it and it falls back to the GPU's default 1280x800. Reapply the real resolution by hand: `niri msg output Virtual-1 mode 1920x1080@60.000`.
 - A VM has no Wi-Fi device by default. noctalia's network panel only shows its Wi-Fi/Ethernet toggle when both interface types exist, so on ethernet-only hardware it stays stuck on an empty Wi-Fi view even though the ethernet connection itself works. Real hardware with both interfaces doesn't hit this.
 - The live root/user account has no password across reboots. The live ISO is stateless, so run `passwd` again each session if you need SSH access for debugging.
 

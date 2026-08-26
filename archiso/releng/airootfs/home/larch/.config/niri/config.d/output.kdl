@@ -1,17 +1,4 @@
-output "eDP-1" {
-    mode "1920x1080@60.000"
-    scale 1
-    transform "normal"
-    background-color "#000000"
-    backdrop-color "#000000"
-    position x=0 y=0
-}
-
-output "HDMI-A-1" {
-    mode "1920x1080@60.000"
-    scale 1
-    transform "normal"
-    background-color "#000000"
-    backdrop-color "#000000"
-    position x=-1920 y=0
-}
+// No output blocks: let niri auto-detect the display and pick its
+// preferred mode. Hardcoding a connector name (eDP-1, HDMI-A-1, ...) only
+// matches specific real hardware and leaves a VM's virtual output (e.g.
+// Virtual-1) or unknown live-boot hardware unconfigured.
