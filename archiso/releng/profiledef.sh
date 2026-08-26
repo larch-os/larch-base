@@ -21,6 +21,7 @@ file_permissions=(
   ["/root/.automated_script.sh"]="0:0:755"
   ["/root/.gnupg"]="0:0:700"
   ["/home/larch"]="1000:100:750"
+  ["/home/larch/.local/state/noctalia/state.toml"]="1000:100:600"
   ["/usr/local/bin/choose-mirror"]="0:0:755"
   ["/usr/local/bin/Installation_guide"]="0:0:755"
   ["/usr/local/bin/livecd-sound"]="0:0:755"

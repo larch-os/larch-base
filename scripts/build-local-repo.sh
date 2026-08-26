@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds the AUR-only packages noctalia depends on (not in the official repos)
+# Builds AUR-only packages the profile depends on (not in the official repos)
 # and drops them into a local pacman repo that archiso/releng/pacman.conf points
 # at via its [custom] repo. Run this once before mkarchiso, and again whenever
 # these packages need bumping.
@@ -19,7 +19,7 @@ PROFILE_DIR="$REPO_ROOT/archiso/releng"
 LOCAL_REPO="$PROFILE_DIR/local-repo"
 BUILD_DIR="$REPO_ROOT/.aur-build-cache"
 
-AUR_PACKAGES=(noctalia-qs noctalia-shell sddm-silent-theme redhat-fonts)
+AUR_PACKAGES=(sddm-silent-theme redhat-fonts)
 
 mkdir -p "$LOCAL_REPO" "$BUILD_DIR"
 

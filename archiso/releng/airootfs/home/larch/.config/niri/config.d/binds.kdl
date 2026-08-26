@@ -1,23 +1,23 @@
 binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+E hotkey-overlay-title="Open dolphine" { spawn "dolphin"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-    Alt+Space { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-    Alt+W { spawn-sh "qs -c noctalia-shell ipc call launcher windows"; }
-    F9 { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
-    Mod+v { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
-    Mod+Shift+w { spawn-sh "qs -c noctalia-shell ipc call wallpaper random eDP-1"; }
-    Ctrl+Alt+Space { spawn-sh "qs -c noctalia-shell ipc call launcher windows"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
+    Alt+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Alt+W { spawn-sh "noctalia msg window-switcher"; }
+    F9 { spawn-sh "noctalia msg bar-toggle"; }
+    Mod+v { spawn-sh "noctalia msg panel-toggle clipboard"; }
+    Mod+Shift+w { spawn-sh "noctalia msg wallpaper-random eDP-1"; }
+    Ctrl+Alt+Space { spawn-sh "noctalia msg window-switcher"; }
     Ctrl+Shift+Print { spawn-sh "~/.config/myscripts/screenshot.sh"; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
-    Mod+m                allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
-    XF86MonBrightnessUp  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
+    Mod+m                allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "noctalia msg media toggle"; }
+    XF86MonBrightnessUp  allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
 
     Mod+g repeat=false { toggle-overview; }
     Mod+C repeat=false { close-window; }

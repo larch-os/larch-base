@@ -2,9 +2,9 @@
 
 Arch based linux distro for lazy yet power users.
 
-Built almost entirely on stock Arch Linux repositories. Default desktop is [niri](https://github.com/YaLTeR/niri) (Wayland scrollable-tiling compositor) with [noctalia](https://github.com/noctalia-dev/noctalia-shell) (Quickshell-based shell). Installation uses a custom TUI installer instead of Calamares. See `docs/arch-niri-distro-context.md` for the design write-up.
+Built almost entirely on stock Arch Linux repositories. Default desktop is [niri](https://github.com/YaLTeR/niri) (Wayland scrollable-tiling compositor) with [noctalia](https://github.com/noctalia-dev/noctalia) (native C++ desktop shell, official `extra` package as of v5). Installation uses a custom TUI installer instead of Calamares. See `docs/arch-niri-distro-context.md` for the design write-up.
 
-The one exception: `noctalia-qs`, `noctalia-shell`, `sddm-silent-theme`, and `redhat-fonts` (a dependency of the SDDM theme) are AUR-only. `scripts/build-local-repo.sh` builds them and feeds them into a local pacman repo the profile points at, so `mkarchiso` still works offline of the AUR.
+The one exception: `sddm-silent-theme` and `redhat-fonts` (a dependency of that theme) are AUR-only. `scripts/build-local-repo.sh` builds them and feeds them into a local pacman repo the profile points at, so `mkarchiso` still works offline of the AUR.
 
 ## Repo layout
 

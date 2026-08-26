@@ -40,8 +40,9 @@ debug {
   honor-xdg-activation-with-invalid-serial
 }
 
+
 layer-rule {
-  match namespace="^noctalia-overview*"
+  match namespace="^noctalia-backdrop"
   place-within-backdrop true
 }
 
