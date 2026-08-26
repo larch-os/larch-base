@@ -3,6 +3,12 @@
 # and drops them into a local pacman repo that archiso/releng/pacman.conf points
 # at via its [custom] repo. Run this once before mkarchiso, and again whenever
 # these packages need bumping.
+#
+# LOCAL_REPO and BUILD_DIR live under /tmp rather than inside the checkout:
+# pacman.conf's Server= line has to be an absolute path, and a fixed /tmp
+# path keeps that path (and the repo) identical no matter where or on which
+# machine this checkout lives, instead of baking in one machine's checkout
+# path.
 set -euo pipefail
 
 if [[ ${EUID} -eq 0 ]]; then
@@ -16,8 +22,8 @@ done
 
 REPO_ROOT="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel)"
 PROFILE_DIR="$REPO_ROOT/archiso/releng"
-LOCAL_REPO="$PROFILE_DIR/local-repo"
-BUILD_DIR="$REPO_ROOT/.aur-build-cache"
+LOCAL_REPO="/tmp/larch-local-repo"
+BUILD_DIR="/tmp/larch-aur-build-cache"
 
 AUR_PACKAGES=(sddm-silent-theme redhat-fonts)
 

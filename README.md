@@ -4,7 +4,7 @@ Arch based linux distro for lazy yet power users.
 
 Built almost entirely on stock Arch Linux repositories. Default desktop is [niri](https://github.com/YaLTeR/niri) (Wayland scrollable-tiling compositor) with [noctalia](https://github.com/noctalia-dev/noctalia) (native C++ desktop shell, official `extra` package as of v5). Installation uses a custom TUI installer instead of Calamares. See `docs/arch-niri-distro-context.md` for the design write-up.
 
-The one exception: `sddm-silent-theme` and `redhat-fonts` (a dependency of that theme) are AUR-only. `scripts/build-local-repo.sh` builds them and feeds them into a local pacman repo the profile points at, so `mkarchiso` still works offline of the AUR.
+The one exception: `sddm-silent-theme` and `redhat-fonts` (a dependency of that theme) are AUR-only. `scripts/build-local-repo.sh` builds them into a local pacman repo at `/tmp/larch-local-repo`, which the profile's `pacman.conf` points at, so `mkarchiso` still works offline of the AUR. That path lives under `/tmp` rather than inside the checkout on purpose: `pacman.conf`'s `Server=` line has to be an absolute path, and a fixed `/tmp` path keeps it identical no matter where or on which machine the repo is cloned.
 
 ## Repo layout
 
@@ -61,7 +61,7 @@ niri needs a real GPU render node. A default virt-install VM (plain `virtio-vga`
 </memoryBacking>
 ```
 
-Give the VM at least 4GB RAM and 4 vCPUs. Default templates hand out 1GB/2 vCPUs, which is too tight for a Qt6/QML shell.
+Give the VM at least 4GB RAM and 4 vCPUs. Default templates hand out 1GB/2 vCPUs, which is too tight for a full desktop shell.
 
 A few VM-only quirks worth knowing, not bugs to fix:
 
