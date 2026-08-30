@@ -8,6 +8,9 @@
 #    plugins into place under the oh-my-zsh submodule's (gitignored) custom/
 #    plugins/ directory, since git won't let a submodule live inside another
 #    submodule's own working tree.
+# 3. Downloads the default wallpaper into the profile's airootfs. Fetched at
+#    build time rather than committed to the repo, binary image assets don't
+#    belong in git history.
 #
 # Run this once before mkarchiso, and again whenever the AUR packages or
 # submodules need bumping.
@@ -24,8 +27,8 @@ if [[ ${EUID} -eq 0 ]]; then
     exit 1
 fi
 
-for cmd in git makepkg repo-add rsync; do
-    command -v "$cmd" >/dev/null || { echo "error: $cmd not found (install git, rsync, and base-devel)" >&2; exit 1; }
+for cmd in git makepkg repo-add rsync curl; do
+    command -v "$cmd" >/dev/null || { echo "error: $cmd not found (install git, rsync, curl, and base-devel)" >&2; exit 1; }
 done
 
 REPO_ROOT="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel)"
@@ -33,6 +36,10 @@ PROFILE_DIR="$REPO_ROOT/archiso/releng"
 OMZ_DIR="$PROFILE_DIR/airootfs/home/larch/.oh-my-zsh"
 LOCAL_REPO="/tmp/larch-local-repo"
 BUILD_DIR="/tmp/larch-aur-build-cache"
+
+# TODO: replace with the real GitHub raw URL for the default wallpaper.
+DEFAULT_WALLPAPER_URL="https://raw.githubusercontent.com/REPLACE-ME/default.jpg"
+DEFAULT_WALLPAPER_DEST="$PROFILE_DIR/airootfs/home/larch/Pictures/Wallpapers/default.jpg"
 
 AUR_PACKAGES=(sddm-silent-theme redhat-fonts)
 ZSH_PLUGINS=(zsh-autosuggestions zsh-syntax-highlighting fzf-tab)
@@ -62,4 +69,7 @@ repo-add "$LOCAL_REPO/custom.db.tar.gz" "$LOCAL_REPO"/*.pkg.tar.zst
 
 sed -i "s#^Server = file://.*#Server = file://$LOCAL_REPO#" "$PROFILE_DIR/pacman.conf"
 
-echo "Local repo ready at $LOCAL_REPO, pacman.conf updated, zsh plugins in place."
+mkdir -p "$(dirname "$DEFAULT_WALLPAPER_DEST")"
+curl -fsSL "$DEFAULT_WALLPAPER_URL" -o "$DEFAULT_WALLPAPER_DEST"
+
+echo "Local repo ready at $LOCAL_REPO, pacman.conf updated, zsh plugins in place, default wallpaper fetched."

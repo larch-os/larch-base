@@ -1,1 +1,4 @@
 /out/
+
+# Fetched by scripts/build-local-repo.sh at build time, not committed.
+/archiso/releng/airootfs/home/larch/Pictures/Wallpapers/default.jpg
