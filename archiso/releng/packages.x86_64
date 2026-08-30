@@ -1,3 +1,4 @@
+adwaita-fonts
 alsa-utils
 amd-ucode
 arch-install-scripts
@@ -90,6 +91,9 @@ nilfs-utils
 niri
 nmap
 noctalia
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
 ntfsprogs
 nvme-cli
 nwg-look
@@ -136,6 +140,9 @@ testdisk
 tmux
 tpm2-tools
 tpm2-tss
+ttf-dejavu
+ttf-jetbrains-mono-nerd
+ttf-liberation
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-common
 ttf-nerd-fonts-symbols-mono
