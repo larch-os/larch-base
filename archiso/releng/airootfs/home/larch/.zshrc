@@ -1,5 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
+DISABLE_AUTO_UPDATE=true
+
 autoload -Uz compinit
 compinit
 
