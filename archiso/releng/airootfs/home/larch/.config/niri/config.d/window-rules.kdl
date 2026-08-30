@@ -32,12 +32,30 @@ window-rule {
 window-rule {
     geometry-corner-radius 15
     clip-to-geometry true
+    // Without this, niri draws the focus ring/border as a solid filled
+    // rectangle behind the window (to avoid gaps around CSD/rounded
+    // corners), which shows through as a flat opaque color once the
+    // window is focused and opacity < 1. See niri issue #1823.
+    draw-border-with-background false
+}
+
+// Floating windows default to "xray" blur (samples the static desktop
+// background, ignoring real window stacking), which reads as no blur at
+// all against a plain backdrop. Switch them to real/regular blur instead.
+window-rule {
+    match is-floating=true
+    background-effect {
+        xray false
+    }
 }
 
 
 debug {
   // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
+  // Focused/covering windows can get promoted to a hardware overlay
+  // plane, bypassing the compositor's blend pass (and thus blur/opacity).
+  disable-direct-scanout
 }
 
 
