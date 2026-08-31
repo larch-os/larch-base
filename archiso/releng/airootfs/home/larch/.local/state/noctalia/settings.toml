@@ -139,10 +139,10 @@ directory = "/home/larch/Pictures/Wallpapers"
 transition_on_startup = true
 
 [wallpaper.default]
-path = "/home/larch/Pictures/Wallpapers/default.jpg"
+path = "/home/larch/Pictures/Wallpapers/default.png"
 
 [wallpaper.last]
-path = "/home/larch/Pictures/Wallpapers/default.jpg"
+path = "/home/larch/Pictures/Wallpapers/default.png"
 
 [widget.clock]
 format = "{:%-I:%M %p}"

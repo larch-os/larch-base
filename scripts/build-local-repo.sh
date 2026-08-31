@@ -37,9 +37,8 @@ OMZ_DIR="$PROFILE_DIR/airootfs/home/larch/.oh-my-zsh"
 LOCAL_REPO="/tmp/larch-local-repo"
 BUILD_DIR="/tmp/larch-aur-build-cache"
 
-# TODO: replace with the real GitHub raw URL for the default wallpaper.
-DEFAULT_WALLPAPER_URL="https://raw.githubusercontent.com/REPLACE-ME/default.jpg"
-DEFAULT_WALLPAPER_DEST="$PROFILE_DIR/airootfs/home/larch/Pictures/Wallpapers/default.jpg"
+DEFAULT_WALLPAPER_URL="https://github.com/user-attachments/assets/bfae1bd8-1ce8-4534-b602-e6a1e39adaaa"
+DEFAULT_WALLPAPER_DEST="$PROFILE_DIR/airootfs/home/larch/Pictures/Wallpapers/default.png"
 
 AUR_PACKAGES=(sddm-silent-theme redhat-fonts)
 ZSH_PLUGINS=(zsh-autosuggestions zsh-syntax-highlighting fzf-tab)
