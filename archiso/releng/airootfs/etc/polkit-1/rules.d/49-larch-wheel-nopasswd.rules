@@ -1,0 +1,11 @@
+// Live-session only: the live user already has unrestricted
+// passwordless sudo (see /etc/sudoers.d/wheel-nopasswd), so a
+// polkit password prompt for the same trust level -- e.g. clicking
+// "Install Larch" in the bar, which runs `pkexec calamares` -- is
+// just friction, not a real security boundary. Anyone who could
+// abuse this could already just use sudo directly.
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});

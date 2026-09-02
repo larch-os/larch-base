@@ -9,6 +9,7 @@ border_width = 0.5
 capsule = true
 center = ["taskbar"]
 end = [
+    "install_larch",
     "tray",
     "notifications",
     "network",
@@ -146,6 +147,16 @@ path = "/home/larch/Pictures/Wallpapers/default.png"
 
 [widget.clock]
 format = "{:%-I:%M %p}"
+
+[widget.install_larch]
+type = "custom_button"
+glyph = "device-desktop-down"
+tooltip = "Install Larch"
+command = "pkexec calamares"
+right_command = ""
+middle_command = ""
+scroll_up_command = ""
+scroll_down_command = ""
 
 [widget.media]
 hide_when_no_media = true
