@@ -4,11 +4,15 @@
 # 1. Builds AUR-only packages the profile depends on and drops them into a
 #    local pacman repo that archiso/releng/pacman.conf points at via its
 #    [custom] repo.
-# 2. Checks out the oh-my-zsh and zsh-plugin git submodules, then copies the
+# 2. Builds larch-calamares (our own Calamares fork -- branding, netinstall
+#    extras, larch-postinstall module) from its own git repo the same way,
+#    into the same local repo. Not an AUR package, so it's cloned from our
+#    own remote instead of aur.archlinux.org.
+# 3. Checks out the oh-my-zsh and zsh-plugin git submodules, then copies the
 #    plugins into place under the oh-my-zsh submodule's (gitignored) custom/
 #    plugins/ directory, since git won't let a submodule live inside another
 #    submodule's own working tree.
-# 3. Downloads the default wallpaper into the profile's airootfs. Fetched at
+# 4. Downloads the default wallpaper into the profile's airootfs. Fetched at
 #    build time rather than committed to the repo, binary image assets don't
 #    belong in git history.
 #
@@ -41,6 +45,7 @@ DEFAULT_WALLPAPER_URL="https://github.com/user-attachments/assets/bfae1bd8-1ce8-
 DEFAULT_WALLPAPER_DEST="$PROFILE_DIR/airootfs/home/larch/Pictures/Wallpapers/default.png"
 
 AUR_PACKAGES=(sddm-silent-theme redhat-fonts)
+LARCH_CALAMARES_URL="https://github.com/larch-os/larch-calamares.git"
 ZSH_PLUGINS=(zsh-autosuggestions zsh-syntax-highlighting fzf-tab)
 
 git -C "$REPO_ROOT" submodule update --init --recursive
@@ -64,6 +69,17 @@ for pkg in "${AUR_PACKAGES[@]}"; do
     cp -f "$pkg_dir"/*.pkg.tar.zst "$LOCAL_REPO/"
 done
 
+calamares_dir="$BUILD_DIR/larch-calamares"
+if [[ -d "$calamares_dir" ]]; then
+    git -C "$calamares_dir" pull --ff-only
+else
+    git clone "$LARCH_CALAMARES_URL" "$calamares_dir"
+fi
+
+(cd "$calamares_dir" && makepkg -sf --noconfirm --needed)
+
+cp -f "$calamares_dir"/*.pkg.tar.zst "$LOCAL_REPO/"
+
 repo-add "$LOCAL_REPO/custom.db.tar.gz" "$LOCAL_REPO"/*.pkg.tar.zst
 
 sed -i "s#^Server = file://.*#Server = file://$LOCAL_REPO#" "$PROFILE_DIR/pacman.conf"
@@ -71,4 +87,4 @@ sed -i "s#^Server = file://.*#Server = file://$LOCAL_REPO#" "$PROFILE_DIR/pacman
 mkdir -p "$(dirname "$DEFAULT_WALLPAPER_DEST")"
 curl -fsSL "$DEFAULT_WALLPAPER_URL" -o "$DEFAULT_WALLPAPER_DEST"
 
-echo "Local repo ready at $LOCAL_REPO, pacman.conf updated, zsh plugins in place, default wallpaper fetched."
+echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, default wallpaper fetched."
