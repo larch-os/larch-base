@@ -1,0 +1,61 @@
+# Larch GRUB theme.
+#
+# Solid dark background rather than the desktop wallpaper: GRUB's
+# image scaling doesn't crop/scale photos reliably across the range
+# of resolutions a bootloader actually runs at, and a solid color
+# stays crisp everywhere. Colors match the installer's branding
+# (src/branding/larch/branding.desc in larch-calamares).
+
+desktop-color: "#1e1e2e"
+terminal-font: "Larch Regular 16"
+
++ label {
+    top = 12%
+    left = 0
+    width = 100%
+    align = "center"
+    text = "Larch"
+    color = "#cdd6f4"
+    font = "Larch Regular 28"
+}
+
++ boot_menu {
+    left = 25%
+    top = 30%
+    width = 50%
+    height = 45%
+
+    item_font = "Larch Regular 16"
+    item_color = "#cdd6f4"
+    item_height = 36
+    item_padding = 8
+    item_spacing = 6
+    item_icon_space = 0
+    icon_width = 0
+    icon_height = 0
+
+    # item_color/selected_item_color are TEXT colors, not
+    # backgrounds -- there's no plain solid "highlight box" property,
+    # only the pixmap-based selected_item_pixmap_style (which needs
+    # real image assets we don't have yet). Using the accent blue for
+    # the selected item's text is the highlight, so it never risks
+    # landing dark-text-on-dark-background.
+    selected_item_font = "Larch Regular 16"
+    selected_item_color = "#89b4fa"
+
+    scrollbar = false
+}
+
++ progress_bar {
+    id = "__timeout__"
+    left = 30%
+    top = 80%
+    width = 40%
+    height = 4
+    font = "Larch Regular 16"
+    text_color = "#a6adc8"
+    fg_color = "#89b4fa"
+    bg_color = "#313244"
+    border_color = "#313244"
+    text = "@TIMEOUT_NOTIFICATION_MIDDLE@"
+}
