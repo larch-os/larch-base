@@ -152,7 +152,16 @@ format = "{:%-I:%M %p}"
 type = "custom_button"
 glyph = "device-desktop-down"
 tooltip = "Install Larch"
-command = "pkexec calamares"
+# pkexec strips the environment before launching root processes, so
+# without explicitly forwarding these, Qt can't detect Wayland and
+# falls back to trying X11 (which doesn't exist here) and aborts --
+# confirmed via journalctl: "could not connect to display", "Could
+# not load the Qt platform plugin xcb". QT_QPA_PLATFORM=wayland
+# forces the right platform outright rather than relying on
+# detection. HOME=/home/larch (not root's own, which has no
+# qt6ct.conf) so the installer actually picks up the dark theme
+# instead of Qt's default light palette.
+command = "sh -c 'pkexec env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland QT_QPA_PLATFORMTHEME=qt6ct HOME=/home/larch calamares'"
 right_command = ""
 middle_command = ""
 scroll_up_command = ""
