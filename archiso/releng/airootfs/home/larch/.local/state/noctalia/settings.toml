@@ -20,7 +20,7 @@ end = [
 ]
 margin_edge = 4
 margin_ends = 350
-start = ["clock", "cpu", "ram", "temp", "media"]
+start = ["clock", "cpu", "ram"]
 
 [control_center]
 sidebar = "full"
