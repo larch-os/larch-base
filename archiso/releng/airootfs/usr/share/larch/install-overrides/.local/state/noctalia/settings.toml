@@ -5,21 +5,16 @@ enabled = true
 
 [bar.default]
 border = "primary"
-border_width = 0.5
 capsule = true
-center = ["taskbar"]
-end = [
-    "tray",
-    "notifications",
-    "network",
-    "bluetooth",
-    "volume",
-    "battery",
-    "control-center",
-]
-margin_edge = 4
-margin_ends = 350
-start = ["clock", "cpu", "ram"]
+capsule_thickness = 0.79999998584389687
+center = [ "taskbar" ]
+end = [ "tray", "media", "notifications", "network", "volume", "battery", "control-center" ]
+font_weight = 400
+margin_ends = 200
+radius = 16
+shadow = false
+start = [ "launcher", "clock", "cpu", "ram" ]
+thickness = 35
 
 [control_center]
 sidebar = "full"
@@ -28,12 +23,12 @@ sidebar = "full"
 schema_version = 2
 widget_order = []
 
-[desktop_widgets.grid]
-cell_size = 16
-major_interval = 4
-visible = true
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
 
-[desktop_widgets.widget]
+    [desktop_widgets.widget]
 
 [dock]
 auto_hide = true
@@ -42,39 +37,39 @@ layer = "overlay"
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = ["lockscreen-login-box@eDP-1"]
+widget_order = [ "lockscreen-login-box@eDP-1" ]
 
-[lockscreen_widgets.grid]
-cell_size = 16
-major_interval = 4
-visible = true
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
 
-[lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-box_height = 196.0
-box_width = 810.0
-cx = 960.0
-cy = 898.0
-output = "eDP-1"
-placement_height = 1080.0
-placement_width = 1920.0
-rotation = 0.0
-type = "login_box"
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
 
-[lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-background_color = "surface_variant"
-background_opacity = 0.88
-background_radius = 12.0
-center_password_text = false
-input_opacity = 1.0
-input_radius = 6.0
-layout = "regular"
-show_caps_lock = true
-show_keyboard_layout = true
-show_login_button = true
-show_media = true
-show_session_buttons = true
-show_unlock_hint = true
-show_weather = true
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
 [osd]
 position = "top_right"
@@ -83,85 +78,92 @@ position = "top_right"
 font_family = "Adwaita Sans"
 screen_time_enabled = true
 
-[shell.launcher]
-pinned = ["firefox", "org.kde.dolphin", "kitty"]
+    [shell.launcher]
+    pinned = [ "firefox", "org.kde.dolphin", "kitty" ]
 
-[shell.panel]
-open_near_click_control_center = true
+    [shell.panel]
+    open_near_click_control_center = true
+    transparency_mode = "glass"
 
-[[shell.session.actions]]
-action = "logout"
-countdown_seconds = 5.0
-enabled = true
-shortcut = "2"
-variant = "default"
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "2"
+    variant = "default"
 
-[[shell.session.actions]]
-action = "lock"
-countdown_seconds = 5.0
-enabled = true
-shortcut = "1"
-variant = "default"
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
 
-[[shell.session.actions]]
-action = "lock_and_suspend"
-countdown_seconds = 5.0
-enabled = true
-shortcut = "3"
-variant = "default"
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "3"
+    variant = "default"
 
-[[shell.session.actions]]
-action = "reboot"
-countdown_seconds = 5.0
-enabled = true
-shortcut = "4"
-variant = "default"
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "4"
+    variant = "default"
 
-[[shell.session.actions]]
-action = "shutdown"
-countdown_seconds = 5.0
-enabled = true
-shortcut = "5"
-variant = "destructive"
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 5.0
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"
 
 [theme]
 builtin = "Catppuccin"
-community_palette = "Doomed"
+community_palette = "Aura"
 mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
-[theme.templates]
-builtin_ids = ["kcolorscheme", "kitty"]
+    [theme.templates]
+    builtin_ids = [ "kcolorscheme", "kitty" ]
 
 [wallpaper]
 directory = "/usr/share/backgrounds/larch"
 transition_on_startup = true
 
-[wallpaper.default]
-path = "/usr/share/backgrounds/larch/default.png"
+    [wallpaper.default]
+    path = "/usr/share/backgrounds/larch/default.png"
 
-[wallpaper.last]
-path = "/usr/share/backgrounds/larch/default.png"
+    [wallpaper.last]
+    path = "/usr/share/backgrounds/larch/default.png"
+
+[widget.battery]
+hide_when_full = true
 
 [widget.clock]
 format = "{:%-I:%M %p}"
 
 [widget.media]
 hide_when_no_media = true
+max_length = 100
 
 [widget.network]
 show_label = false
+
+[widget.notifications]
+hide_when_no_unread = true
 
 [widget.taskbar]
 anchor = true
 capsule = true
 capsule_opacity = 0.0
-capsule_radius = "auto"
+capsule_padding = 8
 group_by_workspace = true
-inactive_opacity = 0.69999999999999996
+inactive_opacity = 0.80000000000000004
 minimal = true
-show_all_outputs = true
 workspace_label_placement = "inside"
 
 [widget.workspaces]
