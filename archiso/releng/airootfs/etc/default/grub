@@ -9,14 +9,14 @@ GRUB_CMDLINE_LINUX=""
 # Preload both GPT and MBR modules so that they are not missed
 GRUB_PRELOAD_MODULES="part_gpt part_msdos"
 
-# Needed even though /boot/efi (the ESP) stays unencrypted: there's no
-# separate /boot partition, so /boot itself (grub.cfg, kernel, initramfs)
-# lives inside the encrypted root. GRUB's EFI binary needs the
-# cryptodisk+luks modules built in to unlock root and read /boot at all.
-# Harmless on non-encrypted installs (opt-out is available in Calamares),
-# just adds unused modules -- confirmed via a real install failing with
-# "attempt to install to encrypted disk without cryptodisk enabled".
-GRUB_ENABLE_CRYPTODISK=y
+# Not set statically here. larch-calamares' grubcfg module (settings.conf's
+# exec sequence, right before bootloader) computes this per-install: "y"
+# when root is LUKS-encrypted and there's no separate unencrypted /boot,
+# unset otherwise (e.g. our separate unencrypted /boot partition layout).
+# It patches this file in place (overwrite: false in grubcfg.conf), so
+# don't hardcode a value here -- it would either be redundant or wrong
+# depending on what the user picked in the partition step.
+#GRUB_ENABLE_CRYPTODISK=y
 
 # Set to 'countdown' or 'hidden' to change timeout behavior,
 # press ESC key to display menu.
