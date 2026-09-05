@@ -136,14 +136,14 @@ wallpaper_scheme = "m3-content"
 builtin_ids = ["kcolorscheme", "kitty"]
 
 [wallpaper]
-directory = "/home/larch/Pictures/Wallpapers"
+directory = "/usr/share/backgrounds/larch"
 transition_on_startup = true
 
 [wallpaper.default]
-path = "/home/larch/Pictures/Wallpapers/default.png"
+path = "/usr/share/backgrounds/larch/default.png"
 
 [wallpaper.last]
-path = "/home/larch/Pictures/Wallpapers/default.png"
+path = "/usr/share/backgrounds/larch/default.png"
 
 [widget.clock]
 format = "{:%-I:%M %p}"

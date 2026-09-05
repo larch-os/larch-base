@@ -12,15 +12,19 @@
 #    plugins into place under the oh-my-zsh submodule's (gitignored) custom/
 #    plugins/ directory, since git won't let a submodule live inside another
 #    submodule's own working tree.
-# 4. Downloads the default wallpaper into the profile's airootfs. Fetched at
-#    build time rather than committed to the repo, binary image assets don't
-#    belong in git history.
+# 4. Downloads the default wallpaper into a shared system location
+#    (/usr/share/backgrounds/larch/), not any one user's home -- every
+#    user's noctalia config (live "larch" and, via /etc/skel, every
+#    installed user) references this same central path, so there's
+#    nothing user-specific to get wrong or keep in sync. Fetched at
+#    build time rather than committed to the repo, binary image assets
+#    don't belong in git history.
 # 5. Mirrors /home/larch (the live user's dotfiles: niri, noctalia, zsh,
-#    wallpapers, etc.) into /etc/skel, so useradd -m during install seeds
-#    new users with the same config instead of Arch's bare-bones default
-#    skel. /home/larch stays the one canonical source; skel is derived,
-#    not hand-maintained -- run last, after the plugin/wallpaper steps
-#    above have finished populating /home/larch.
+#    etc.) into /etc/skel, so useradd -m during install seeds new users
+#    with the same config instead of Arch's bare-bones default skel.
+#    /home/larch stays the one canonical source; skel is derived, not
+#    hand-maintained -- run last, after the plugin step above has
+#    finished populating /home/larch.
 #
 # Run this once before mkarchiso, and again whenever the AUR packages or
 # submodules need bumping.
@@ -48,7 +52,7 @@ LOCAL_REPO="/tmp/larch-local-repo"
 BUILD_DIR="/tmp/larch-aur-build-cache"
 
 DEFAULT_WALLPAPER_URL="https://github.com/user-attachments/assets/bfae1bd8-1ce8-4534-b602-e6a1e39adaaa"
-DEFAULT_WALLPAPER_DEST="$PROFILE_DIR/airootfs/home/larch/Pictures/Wallpapers/default.png"
+DEFAULT_WALLPAPER_DEST="$PROFILE_DIR/airootfs/usr/share/backgrounds/larch/default.png"
 
 AUR_PACKAGES=(sddm-silent-theme redhat-fonts herdr-bin)
 LARCH_CALAMARES_URL="https://github.com/larch-os/larch-calamares.git"
@@ -95,4 +99,4 @@ curl -fsSL "$DEFAULT_WALLPAPER_URL" -o "$DEFAULT_WALLPAPER_DEST"
 
 rsync -a --delete "$PROFILE_DIR/airootfs/home/larch/" "$PROFILE_DIR/airootfs/etc/skel/"
 
-echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, default wallpaper fetched, /etc/skel synced from /home/larch."
+echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, default wallpaper fetched to a central location, /etc/skel synced from /home/larch."
