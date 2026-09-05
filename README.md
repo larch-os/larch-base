@@ -10,6 +10,10 @@
 
 niri and noctalia by default, stock Arch repos underneath. Full docs, including the desktop guide, build instructions, and the project roadmap, live at [larchos.vercel.app](https://larchos.vercel.app).
 
+## Showcase
+<img width="1920" height="1080" alt="hero" src="https://github.com/user-attachments/assets/3327db16-d57b-425b-ae0a-1ae75e4e80c3" />
+
+
 ## Quick build
 
 ```sh
