@@ -15,6 +15,12 @@
 # 4. Downloads the default wallpaper into the profile's airootfs. Fetched at
 #    build time rather than committed to the repo, binary image assets don't
 #    belong in git history.
+# 5. Mirrors /home/larch (the live user's dotfiles: niri, noctalia, zsh,
+#    wallpapers, etc.) into /etc/skel, so useradd -m during install seeds
+#    new users with the same config instead of Arch's bare-bones default
+#    skel. /home/larch stays the one canonical source; skel is derived,
+#    not hand-maintained -- run last, after the plugin/wallpaper steps
+#    above have finished populating /home/larch.
 #
 # Run this once before mkarchiso, and again whenever the AUR packages or
 # submodules need bumping.
@@ -87,4 +93,6 @@ sed -i "s#^Server = file://.*#Server = file://$LOCAL_REPO#" "$PROFILE_DIR/pacman
 mkdir -p "$(dirname "$DEFAULT_WALLPAPER_DEST")"
 curl -fsSL "$DEFAULT_WALLPAPER_URL" -o "$DEFAULT_WALLPAPER_DEST"
 
-echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, default wallpaper fetched."
+rsync -a --delete "$PROFILE_DIR/airootfs/home/larch/" "$PROFILE_DIR/airootfs/etc/skel/"
+
+echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, default wallpaper fetched, /etc/skel synced from /home/larch."
