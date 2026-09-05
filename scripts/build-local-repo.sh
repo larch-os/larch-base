@@ -14,17 +14,18 @@
 #    submodule's own working tree.
 # 4. Downloads the default wallpaper into a shared system location
 #    (/usr/share/backgrounds/larch/), not any one user's home -- every
-#    user's noctalia config (live "larch" and, via /etc/skel, every
-#    installed user) references this same central path, so there's
-#    nothing user-specific to get wrong or keep in sync. Fetched at
-#    build time rather than committed to the repo, binary image assets
-#    don't belong in git history.
-# 5. Mirrors /home/larch (the live user's dotfiles: niri, noctalia, zsh,
-#    etc.) into /etc/skel, so useradd -m during install seeds new users
-#    with the same config instead of Arch's bare-bones default skel.
-#    /home/larch stays the one canonical source; skel is derived, not
-#    hand-maintained -- run last, after the plugin step above has
-#    finished populating /home/larch.
+#    user's noctalia config (live "larch" and, via larch-postinstall,
+#    the installer-created user) references this same central path, so
+#    there's nothing user-specific to get wrong or keep in sync. Fetched
+#    at build time rather than committed to the repo, binary image
+#    assets don't belong in git history.
+#
+# /etc/skel is deliberately left as plain Arch default (just whatever
+# the bash/screen packages put there) -- Larch's zsh/niri/noctalia setup
+# is only for the live user and the one user Calamares creates at
+# install time, not for every future `useradd`. See larch-calamares'
+# larch-postinstall module and this repo's install-overrides/ for how
+# that user gets seeded instead.
 #
 # Run this once before mkarchiso, and again whenever the AUR packages or
 # submodules need bumping.
@@ -97,6 +98,4 @@ sed -i "s#^Server = file://.*#Server = file://$LOCAL_REPO#" "$PROFILE_DIR/pacman
 mkdir -p "$(dirname "$DEFAULT_WALLPAPER_DEST")"
 curl -fsSL "$DEFAULT_WALLPAPER_URL" -o "$DEFAULT_WALLPAPER_DEST"
 
-rsync -a --delete "$PROFILE_DIR/airootfs/home/larch/" "$PROFILE_DIR/airootfs/etc/skel/"
-
-echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, default wallpaper fetched to a central location, /etc/skel synced from /home/larch."
+echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, default wallpaper fetched to a central location."
