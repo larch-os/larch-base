@@ -55,7 +55,7 @@ BUILD_DIR="/tmp/larch-aur-build-cache"
 DEFAULT_WALLPAPER_URL="https://github.com/user-attachments/assets/bfae1bd8-1ce8-4534-b602-e6a1e39adaaa"
 DEFAULT_WALLPAPER_DEST="$PROFILE_DIR/airootfs/usr/share/backgrounds/larch/default.png"
 
-AUR_PACKAGES=(sddm-silent-theme redhat-fonts herdr-bin)
+AUR_PACKAGES=(sddm-silent-theme redhat-fonts herdr-bin paru-bin k3d-bin)
 LARCH_CALAMARES_URL="https://github.com/larch-os/larch-calamares.git"
 ZSH_PLUGINS=(zsh-autosuggestions zsh-syntax-highlighting fzf-tab)
 
