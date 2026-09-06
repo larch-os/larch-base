@@ -138,10 +138,10 @@ directory = "/usr/share/backgrounds/larch"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/usr/share/backgrounds/larch/default.png"
+    path = "/usr/share/backgrounds/larch/larch-0.png"
 
     [wallpaper.last]
-    path = "/usr/share/backgrounds/larch/default.png"
+    path = "/usr/share/backgrounds/larch/larch-0.png"
 
 [widget.battery]
 hide_when_full = true

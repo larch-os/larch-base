@@ -12,13 +12,16 @@
 #    plugins into place under the oh-my-zsh submodule's (gitignored) custom/
 #    plugins/ directory, since git won't let a submodule live inside another
 #    submodule's own working tree.
-# 4. Downloads the default wallpaper into a shared system location
+# 4. Downloads the full wallpaper set into a shared system location
 #    (/usr/share/backgrounds/larch/), not any one user's home -- every
 #    user's noctalia config (live "larch" and, via larch-postinstall,
 #    the installer-created user) references this same central path, so
 #    there's nothing user-specific to get wrong or keep in sync. Fetched
 #    at build time rather than committed to the repo, binary image
-#    assets don't belong in git history.
+#    assets don't belong in git history. Wallpapers are numbered
+#    larch-0.png, larch-1.png, ... at a fixed base URL; fetched by
+#    probing upward until a URL 404s, so adding a new one upstream
+#    needs no change here. larch-0.png is the default.
 #
 # /etc/skel is deliberately left as plain Arch default (just whatever
 # the bash/screen packages put there) -- Larch's zsh/niri/noctalia setup
@@ -52,8 +55,8 @@ OMZ_DIR="$PROFILE_DIR/airootfs/home/larch/.oh-my-zsh"
 LOCAL_REPO="/tmp/larch-local-repo"
 BUILD_DIR="/tmp/larch-aur-build-cache"
 
-DEFAULT_WALLPAPER_URL="https://github.com/user-attachments/assets/bfae1bd8-1ce8-4534-b602-e6a1e39adaaa"
-DEFAULT_WALLPAPER_DEST="$PROFILE_DIR/airootfs/usr/share/backgrounds/larch/default.png"
+WALLPAPER_BASE_URL="https://storage.googleapis.com/larch-os/assets/wallpapers"
+WALLPAPER_DEST_DIR="$PROFILE_DIR/airootfs/usr/share/backgrounds/larch"
 
 AUR_PACKAGES=(sddm-silent-theme redhat-fonts herdr-bin paru-bin k3d-bin)
 LARCH_CALAMARES_URL="https://github.com/larch-os/larch-calamares.git"
@@ -95,7 +98,16 @@ repo-add "$LOCAL_REPO/custom.db.tar.gz" "$LOCAL_REPO"/*.pkg.tar.zst
 
 sed -i "s#^Server = file://.*#Server = file://$LOCAL_REPO#" "$PROFILE_DIR/pacman.conf"
 
-mkdir -p "$(dirname "$DEFAULT_WALLPAPER_DEST")"
-curl -fsSL "$DEFAULT_WALLPAPER_URL" -o "$DEFAULT_WALLPAPER_DEST"
+rm -rf "$WALLPAPER_DEST_DIR"
+mkdir -p "$WALLPAPER_DEST_DIR"
+wallpaper_count=0
+while curl -fsSL "$WALLPAPER_BASE_URL/larch-$wallpaper_count.png" -o "$WALLPAPER_DEST_DIR/larch-$wallpaper_count.png"; do
+    wallpaper_count=$((wallpaper_count + 1))
+done
+rm -f "$WALLPAPER_DEST_DIR/larch-$wallpaper_count.png"  # curl -f still creates this on the 404 that ended the loop
+if [[ $wallpaper_count -eq 0 ]]; then
+    echo "error: no wallpapers found at $WALLPAPER_BASE_URL/larch-0.png" >&2
+    exit 1
+fi
 
-echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, default wallpaper fetched to a central location."
+echo "Local repo ready at $LOCAL_REPO (incl. larch-calamares), pacman.conf updated, zsh plugins in place, $wallpaper_count wallpapers fetched to a central location."
