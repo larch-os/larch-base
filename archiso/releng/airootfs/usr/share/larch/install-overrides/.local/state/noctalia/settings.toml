@@ -5,13 +5,16 @@ enabled = true
 
 [bar.default]
 border = "primary"
+border_width = 0.5
 capsule = true
 capsule_thickness = 0.79999998584389687
 center = [ "taskbar" ]
+concave_edge_corners = false
 end = [ "tray", "media", "notifications", "network", "volume", "battery", "control-center" ]
 font_weight = 400
+margin_edge = 4
 margin_ends = 200
-radius = 16
+radius = 20
 shadow = false
 start = [ "launcher", "clock", "cpu", "ram" ]
 thickness = 35
