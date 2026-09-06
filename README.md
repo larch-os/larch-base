@@ -19,17 +19,18 @@ niri and noctalia by default, stock Arch repos underneath. Full docs, including 
 ```sh
 git clone --recurse-submodules git@github.com:larch-os/larch-base.git
 cd larch-base
-./scripts/build-local-repo.sh
-sudo mkarchiso -v -o out/ archiso/releng
+make prepare
+make iso
 ```
 
-See [Building the ISO](https://larchos.vercel.app/docs/development/building-the-iso) for what `build-local-repo.sh` actually does, and a real gotcha around incremental rebuilds.
+See [Building the ISO](https://larchos.vercel.app/docs/development/building-the-iso) for what `make prepare` actually does, and a real gotcha around incremental rebuilds.
 
 ## Repo layout
 
 ```
 archiso/releng/   archiso profile for the ISO, forked from the official releng profile
-scripts/          build-time tooling (AUR-package local repo)
+scripts/          pre-ISO prep tooling (AUR packages, wallpapers, submodules)
+Makefile          prepare/iso/clean targets wrapping scripts/ and mkarchiso
 assets/           brand assets (logo, splash source)
 docs/             design notes
 ```

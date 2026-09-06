@@ -29,7 +29,7 @@ daily-driver machine, not something designed from scratch.
 - **Theming**: dark GTK3/GTK4 + dark qt5ct/qt6ct + nwg-look + xsettingsd,
   replicated verbatim from the real machine's already-applied dark theme.
 - **AUR exception**: `sddm-silent-theme` and its `redhat-fonts` dependency
-  are AUR-only. `scripts/build-local-repo.sh` builds them into a local
+  are AUR-only. `scripts/prepare-iso.sh` builds them into a local
   pacman repo at `/tmp/larch-local-repo` (fixed path so `pacman.conf`'s
   `Server=` line works from any checkout location, on any machine).
 
@@ -42,7 +42,7 @@ passthrough and confirmed working.
 
 - **oh-my-zsh is a git submodule**, not vendored files. It and its 3
   plugins live at `archiso/releng/airootfs/home/larch/.oh-my-zsh` and
-  `vendor/zsh-plugins/*`. `scripts/build-local-repo.sh` checks out the
+  `vendor/zsh-plugins/*`. `scripts/prepare-iso.sh` checks out the
   submodules and copies the plugins into place (git won't let a submodule
   live inside another submodule's own working tree, hence the copy step).
   Clone with `--recurse-submodules` or nothing works.
@@ -64,7 +64,7 @@ passthrough and confirmed working.
   build, repoint the VM's disk XML at the real dated filename
   (`out/larch-<date>-x86_64.iso`) instead.
 - Full list of AUR packages needing a rebuild if Qt6 ABI shifts:
-  `sddm-silent-theme`, `redhat-fonts` (see `scripts/build-local-repo.sh`).
+  `sddm-silent-theme`, `redhat-fonts` (see `scripts/prepare-iso.sh`).
 
 ## VM testing quirks (see README's "Testing in a VM" section for full XML)
 
