@@ -11,9 +11,9 @@ spawn-at-startup "swayidle" "-w"
 // Auto-launch the installer on live boot -- same command as the
 // noctalia bar's install button (kept there too, in case this gets
 // closed and needs relaunching). See that widget's own comment in
-// larch-base's noctalia settings.toml for why the env forwarding and
-// HOME override are needed with pkexec.
-spawn-at-startup "sh" "-c" "pkexec env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland QT_QPA_PLATFORMTHEME=qt6ct HOME=/home/larch calamares"
+// larch-base's noctalia settings.toml for why the env forwarding,
+// HOME override, and LANG override are needed with pkexec.
+spawn-at-startup "sh" "-c" "pkexec env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland QT_QPA_PLATFORMTHEME=qt6ct HOME=/home/larch LANG=en_US.UTF-8 calamares"
 
 
 hotkey-overlay {

@@ -162,9 +162,16 @@ tooltip = "Install Larch"
 # forces the right platform outright rather than relying on
 # detection. HOME=/home/larch (not root's own, which has no
 # qt6ct.conf) so the installer actually picks up the dark theme
-# instead of Qt's default light palette.
+# instead of Qt's default light palette. LANG=en_US.UTF-8: Calamares'
+# locale module defaults its language picker to QLocale().name(),
+# the launched process' own system locale, when nothing's set --
+# without this, that resolves to whatever ambient locale leaks
+# through pkexec (confirmed once as "en_IN", no UTF-8 suffix, which
+# glibc generated correctly but wrote to /etc/locale.conf without the
+# suffix, breaking UTF-8 detection in apps like btop). Forcing it
+# here keeps the default install a known-good en_US regardless.
 [widget.install_larch.actions]
-left = "exec sh -c 'pkexec env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland QT_QPA_PLATFORMTHEME=qt6ct HOME=/home/larch calamares'"
+left = "exec sh -c 'pkexec env WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR QT_QPA_PLATFORM=wayland QT_QPA_PLATFORMTHEME=qt6ct HOME=/home/larch LANG=en_US.UTF-8 calamares'"
 
 [widget.media]
 hide_when_no_media = true
