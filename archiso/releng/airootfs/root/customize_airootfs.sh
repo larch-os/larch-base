@@ -30,22 +30,27 @@ done
 #
 # Configured here, post-pacstrap, not as a static [chaotic-aur] entry in
 # the profile's own pacman.conf: mkarchiso's pacstrap call passes -G (skip
-# copying the host's already-trusted keyring), so during that initial
-# bootstrap there's no working trust for this key yet -- only the
-# *target's own* keyring, fully populated by the time this script runs
-# (proven by the plain `pacman` calls already below), can be extended.
+# copying the host's already-trusted keyring), so this needs its own
+# from-scratch keyring bootstrap rather than relying on anything the
+# initial pacstrap set up.
 #
-# Order matters: every pacman-suite tool (pacman-key included) parses the
-# *entire* pacman.conf up front, Include= directives and all. Appending
+# --init/--populate first: -G means the target never got the host's
+# keyring, and nothing else in a bare pacstrap -G bootstrap runs this on
+# its own -- confirmed the hard way ("You do not have sufficient
+# permissions to read the pacman keyring", pacman-key's own generic error
+# for an uninitialized target keyring, not an actual filesystem
+# permissions bug despite the wording).
+#
+# Order matters for the rest: every pacman-suite tool parses the *entire*
+# pacman.conf up front, Include= directives and all. Appending
 # [chaotic-aur]'s Include= line before chaotic-mirrorlist is actually
 # installed breaks every subsequent pacman call, including the very
-# pacman-key/pacman -U calls meant to install it -- confirmed the hard
-# way ("config file /etc/pacman.d/chaotic-mirrorlist could not be read",
-# which then surfaces as a misleading "insufficient permissions to read
-# the pacman keyring" from pacman-key, a side effect of the same failed
-# parse, not a real keyring problem). Key trust + the actual keyring/
-# mirrorlist package installs must both happen *before* pacman.conf ever
-# mentions chaotic-aur at all.
+# pacman -U call meant to install it (this one really did surface as
+# "config file /etc/pacman.d/chaotic-mirrorlist could not be read" the
+# first time). Key trust + the actual keyring/mirrorlist package installs
+# must both happen *before* pacman.conf ever mentions chaotic-aur at all.
+pacman-key --init
+pacman-key --populate archlinux
 pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 pacman-key --lsign-key 3056513887B78AEB
 pacman -U --noconfirm \
