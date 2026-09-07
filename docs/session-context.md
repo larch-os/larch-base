@@ -62,6 +62,24 @@ passthrough and confirmed working.
   was in the stock `releng` package list and silently overwrote the
   oh-my-zsh prompt via a `precmd_functions` hook — root-caused and removed.
   Don't re-add it.
+- **`customize_airootfs.sh` must live at
+  `archiso/releng/airootfs/root/customize_airootfs.sh`, not at the
+  profile root.** Found the hard way: it sat at
+  `archiso/releng/customize_airootfs.sh` for this project's entire
+  history, and `mkarchiso` (checked directly in its installed source,
+  `/usr/bin/mkarchiso`) only ever looks for
+  `${pacstrap_dir}/root/customize_airootfs.sh` — there's no separate
+  copy-from-profile-root step anywhere in it. That path only gets
+  populated via the normal airootfs/ overlay copy, so the script had
+  *never actually run*, silently, since it was first added — confirmed
+  by a real build's log jumping straight from "Copying /etc/skel/* to
+  user homes" to "Creating a list of installed packages" with no
+  "Running customize_airootfs.sh in..." line in between at all. Moved
+  (see `profiledef.sh`'s `file_permissions` for the matching `0:0:755`
+  entry, same pattern as `/root/.automated_script.sh`). Every prior
+  "successful, tested" ISO build was missing the docker/docker-buildx
+  removal, the fontconfig override, and (once added) the Chaotic-AUR/
+  paru setup below — none of that had ever actually taken effect.
 - **Chaotic-AUR is set up in `customize_airootfs.sh`, not as a static
   `[chaotic-aur]` entry in `pacman.conf`.** It has to run post-pacstrap:
   `mkarchiso` passes `-G` to `pacstrap` (skip copying the host's already-
