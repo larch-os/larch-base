@@ -1,0 +1,24 @@
+# ReGreet's own config. The dedicated "greeter" system user (created
+# automatically by greetd's package, see its sysusers.d fragment) has no
+# home-directory dotfiles of its own, so the [GTK] values below are copied
+# from home/larch/.config/gtk-4.0/settings.ini rather than assumed to
+# "just match" the rest of the desktop.
+skip_selection = true  # Larch only ever ships one session (niri).
+
+[background]
+path = "/usr/share/backgrounds/larch/larch-0.png"
+fit = "Cover"
+
+[GTK]
+application_prefer_dark_theme = true
+cursor_theme_name = "breeze_cursors"
+font_name = "Adwaita Sans 10"
+icon_theme_name = "Adwaita"
+theme_name = "Adwaita"
+
+[appearance]
+greeting_msg = "Welcome to Larch"
+
+[widget.clock]
+format = "%a %H:%M"
+resolution = "1000ms"

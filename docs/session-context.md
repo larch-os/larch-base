@@ -14,7 +14,7 @@ daily-driver machine, not something designed from scratch.
 - **Branding**: ISO metadata, boot menus (syslinux/systemd-boot/grub),
   splash image, `os-release`/`issue`, hostname, motd. Tagline: "Arch based
   linux distro for lazy yet power users."
-- **Live user**: dedicated `larch` user (uid 1000), SDDM autologin straight
+- **Live user**: dedicated `larch` user (uid 1000), greetd autologin straight
   into a niri session, passwordless wheel sudo.
 - **Desktop**: niri (Wayland compositor) + noctalia v5 (official `extra`
   package, TOML config — migrated off the old AUR v4/JSON setup). Display
@@ -28,10 +28,12 @@ daily-driver machine, not something designed from scratch.
   installed for `eza --icons`.
 - **Theming**: dark GTK3/GTK4 + dark qt5ct/qt6ct + nwg-look + xsettingsd,
   replicated verbatim from the real machine's already-applied dark theme.
-- **AUR exception**: `sddm-silent-theme` and its `redhat-fonts` dependency
-  are AUR-only. `scripts/prepare-iso.sh` builds them into a local
-  pacman repo at `/tmp/larch-local-repo` (fixed path so `pacman.conf`'s
-  `Server=` line works from any checkout location, on any machine).
+- **Login manager**: greetd + ReGreet (`greetd-regreet`, official `extra`,
+  no AUR), replacing SDDM. ReGreet's config/CSS
+  (`etc/greetd/regreet.{toml,css}`) is static, shared by live and installed
+  alike via the squashfs; `etc/greetd/config.toml`'s autologin differs
+  per-install (see `larch-calamares`'s `displaymanager`/`larch-preinstall`
+  modules).
 
 Everything above is committed and pushed to `origin/main`
 (`git@github.com:larch-os/larch-base.git`). The most recent build,
@@ -63,8 +65,6 @@ passthrough and confirmed working.
 - **Never rename the built ISO file.** If a VM needs pointing at a new
   build, repoint the VM's disk XML at the real dated filename
   (`out/larch-<date>-x86_64.iso`) instead.
-- Full list of AUR packages needing a rebuild if Qt6 ABI shifts:
-  `sddm-silent-theme`, `redhat-fonts` (see `scripts/prepare-iso.sh`).
 
 ## VM testing quirks (see README's "Testing in a VM" section for full XML)
 

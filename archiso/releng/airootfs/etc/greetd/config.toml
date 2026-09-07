@@ -1,0 +1,27 @@
+# Larch: replaces SDDM's etc/sddm.conf.d/00-larch.conf. Calamares' own
+# displaymanager module (larch-calamares/src/modules/displaymanager) writes
+# an equivalent file on the installed system with different values for
+# default_session.command (kept in sync manually, see that module's
+# DMgreetd.set_autologin()) and initial_session (autologin is opt-in there,
+# set from whatever the user picked on Calamares' users page -- never
+# hardcoded to "larch").
+[terminal]
+vt = "next"
+
+# The session greetd falls back to whenever no other session is active
+# (e.g. the initial autologin session below ends, or on any boot where
+# autologin isn't configured). Must be valid even though it's normally
+# never seen on live boot -- greetd still requires a well-formed
+# default_session to start at all.
+[default_session]
+command = "dbus-run-session cage -s -mlast -d -- regreet"
+user = "greeter"
+
+# Autologin straight into niri for the live "larch" user -- same behavior
+# as SDDM's old [Autologin] section, so the greeter is never actually shown
+# during a normal live boot. This section is stripped by
+# larch-calamares' larch-preinstall module before install, so an install
+# never inherits live autologin.
+[initial_session]
+command = "/usr/bin/niri"
+user = "larch"

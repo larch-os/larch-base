@@ -1,0 +1,42 @@
+/* Larch's ReGreet theme -- minimal, not a full reskin.
+ *
+ * Selector names below come from ReGreet's actual widget tree
+ * (src/gui/templates.rs upstream), not guessed: "background" is a CSS
+ * class shared by BOTH the login card and the clock frame (ReGreet's own
+ * naming, a little confusing since the fullscreen wallpaper widget is a
+ * *different* thing, addressed separately as #background below). The
+ * clock frame cancels its own top corners/border via inline CSS upstream
+ * (it sits flush against the screen edge), so styling .background once
+ * here covers both without fighting that.
+ */
+
+picture#background {
+  /* The wallpaper itself (regreet.toml's [background].path) needs no
+     extra styling -- GTK's ContentFit already handles scaling. */
+}
+
+frame.background {
+  background-color: alpha(#1e1e2e, 0.72);
+  border: 1px solid alpha(#ffffff, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px alpha(#000000, 0.35);
+}
+
+#message_label,
+#input_label,
+#session_label {
+  color: #cdd6f4;
+}
+
+#username_entry,
+#secret_entry,
+#visible_entry,
+#usernames_box,
+#sessions_box {
+  border-radius: 10px;
+}
+
+#clock_frame label {
+  color: #cdd6f4;
+  font-size: 1.1em;
+}

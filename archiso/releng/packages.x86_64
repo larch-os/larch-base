@@ -13,6 +13,7 @@ breeze-cursors
 breeze-icons
 brltty
 btrfs-progs
+cage
 cliphist
 clonezilla
 cloud-init
@@ -43,6 +44,8 @@ ghostty-terminfo
 gpart
 gpm
 gptfdisk
+greetd
+greetd-regreet
 grim
 grub
 gtk-update-icon-cache
@@ -112,9 +115,9 @@ polkit-gnome
 ppp
 pptpclient
 pv
+python-toml
 qemu-guest-agent
 qt5ct
-qt6-virtualkeyboard
 qt6ct
 refind
 reflector
@@ -122,8 +125,6 @@ rsync
 rxvt-unicode-terminfo
 satty
 screen
-sddm
-sddm-silent-theme
 sdparm
 sequoia-sq
 sg3_utils
