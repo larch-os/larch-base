@@ -62,6 +62,20 @@ passthrough and confirmed working.
   was in the stock `releng` package list and silently overwrote the
   oh-my-zsh prompt via a `precmd_functions` hook — root-caused and removed.
   Don't re-add it.
+- **Chaotic-AUR is set up in `customize_airootfs.sh`, not as a static
+  `[chaotic-aur]` entry in `pacman.conf`.** It has to run post-pacstrap:
+  `mkarchiso` passes `-G` to `pacstrap` (skip copying the host's already-
+  trusted keyring), so the *target's own* keyring only becomes usable
+  partway through that initial bootstrap — too late to matter for a repo
+  that isn't even configured yet, but exactly why the key-trust and repo
+  setup work fine here, after pacstrap has already finished. `paru` itself
+  is installed this way now (chaotic-aur only carries source-built
+  "paru", no functional difference from a "paru-bin" since chaotic
+  prebuilds it anyway) — replaced the old local `makepkg` build in
+  `scripts/prepare-iso.sh`. `herdr-bin`/`k3d-bin` stay on the local build
+  (not on chaotic-aur at all). `visual-studio-code-bin` is only made
+  *resolvable* here, never installed on the live ISO — see
+  `larch-calamares`'s `netinstall/netinstall.conf`.
 - **Never rename the built ISO file.** If a VM needs pointing at a new
   build, repoint the VM's disk XML at the real dated filename
   (`out/larch-<date>-x86_64.iso`) instead.

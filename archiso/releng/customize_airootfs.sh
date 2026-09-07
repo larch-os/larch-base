@@ -19,6 +19,34 @@ for plugin in zsh-autosuggestions zsh-syntax-highlighting fzf-tab; do
     fi
 done
 
+# Chaotic-AUR: a prebuilt binary repo, used for a few packages neither the
+# base Arch repos nor our own local build script (scripts/prepare-iso.sh)
+# cover -- paru itself here (avoids the chicken-and-egg of building an AUR
+# helper via makepkg -- chaotic only carries source-built "paru", not a
+# "paru-bin", no functional difference since chaotic prebuilds it either
+# way), and visual-studio-code-bin at install time only (see
+# larch-calamares' netinstall/netinstall.conf; that one's never installed
+# here, only made resolvable for later).
+#
+# Configured here, post-pacstrap, not as a static [chaotic-aur] entry in
+# the profile's own pacman.conf: mkarchiso's pacstrap call passes -G (skip
+# copying the host's already-trusted keyring), so during that initial
+# bootstrap there's no working trust for this key yet -- only the
+# *target's own* keyring, fully populated by the time this script runs
+# (proven by the plain `pacman` calls already below), can be extended.
+cat >>/etc/pacman.conf <<'EOF'
+
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+EOF
+pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+pacman-key --lsign-key 3056513887B78AEB
+pacman -U --noconfirm \
+    'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
+    'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+pacman -Sy
+pacman -S --noconfirm --needed paru
+
 gtk-update-icon-cache -f -t /usr/share/icons/hicolor
 
 # docker/docker-buildx land here as a transitive dependency of k3d-bin (k3d
