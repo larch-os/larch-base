@@ -34,16 +34,28 @@ done
 # bootstrap there's no working trust for this key yet -- only the
 # *target's own* keyring, fully populated by the time this script runs
 # (proven by the plain `pacman` calls already below), can be extended.
-cat >>/etc/pacman.conf <<'EOF'
-
-[chaotic-aur]
-Include = /etc/pacman.d/chaotic-mirrorlist
-EOF
+#
+# Order matters: every pacman-suite tool (pacman-key included) parses the
+# *entire* pacman.conf up front, Include= directives and all. Appending
+# [chaotic-aur]'s Include= line before chaotic-mirrorlist is actually
+# installed breaks every subsequent pacman call, including the very
+# pacman-key/pacman -U calls meant to install it -- confirmed the hard
+# way ("config file /etc/pacman.d/chaotic-mirrorlist could not be read",
+# which then surfaces as a misleading "insufficient permissions to read
+# the pacman keyring" from pacman-key, a side effect of the same failed
+# parse, not a real keyring problem). Key trust + the actual keyring/
+# mirrorlist package installs must both happen *before* pacman.conf ever
+# mentions chaotic-aur at all.
 pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 pacman-key --lsign-key 3056513887B78AEB
 pacman -U --noconfirm \
     'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
     'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+cat >>/etc/pacman.conf <<'EOF'
+
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+EOF
 pacman -Sy
 pacman -S --noconfirm --needed paru
 
