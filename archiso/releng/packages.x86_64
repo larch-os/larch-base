@@ -12,7 +12,6 @@ breeze
 breeze-cursors
 breeze-icons
 brltty
-btop
 btrfs-progs
 cliphist
 clonezilla
@@ -48,21 +47,16 @@ grim
 grub
 gtk-update-icon-cache
 hdparm
-herdr-bin
-htop
 hyperv
 intel-ucode
 irssi
 iw
 iwd
 jfsutils
-k3d-bin
 kitty
 kitty-terminfo
 kmscon-terminfo
-kubectl
 larch-calamares
-lazygit
 ldns
 less
 lftp
@@ -157,7 +151,6 @@ udftools
 usb_modeswitch
 usbmuxd
 usbutils
-uv
 vim
 virtualbox-guest-utils-nox
 vpnc
