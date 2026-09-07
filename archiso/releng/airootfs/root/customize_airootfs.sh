@@ -49,6 +49,14 @@ done
 # "config file /etc/pacman.d/chaotic-mirrorlist could not be read" the
 # first time). Key trust + the actual keyring/mirrorlist package installs
 # must both happen *before* pacman.conf ever mentions chaotic-aur at all.
+# pacman's CheckSpace pre-flight can't reliably determine the root
+# mount point from inside arch-chroot (this isn't a real bind-mounted
+# filesystem) and misreports "not enough free disk space" even with
+# tens of GB actually free -- confirmed the hard way. Only an install
+# operation triggers this check, which is why the earlier pacman -Rdd
+# (remove) call above never hit it. A well-known false positive for
+# pacman-in-a-chroot, not specific to Chaotic-AUR's packages.
+sed -i '/^CheckSpace/d' /etc/pacman.conf
 pacman-key --init
 pacman-key --populate archlinux
 pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
