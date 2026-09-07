@@ -21,6 +21,19 @@ done
 
 gtk-update-icon-cache -f -t /usr/share/icons/hicolor
 
+# docker/docker-buildx land here as a transitive dependency of k3d-bin (k3d
+# runs k3s inside Docker, so it's a hard `depends=`), not because we listed
+# them -- pacstrap pulls in dependencies of anything in packages.x86_64
+# whether we asked for them or not. Docker is meant to be strictly opt-in
+# (the netinstall extras page already offers it, installed fresh with real
+# network access at that point), so stripping it back out here keeps it out
+# of both the live session and any install that doesn't explicitly pick it.
+# -Rdd: skip dependency and file-conflict checks, since k3d-bin nominally
+# still depends on it -- this leaves that dependency unsatisfied on purpose,
+# the k3d binary itself is unaffected, it just needs Docker installed
+# separately to actually run anything.
+pacman -Rdd --noconfirm docker docker-buildx 2>/dev/null || true
+
 # Overwritten here rather than shipped as a plain airootfs overlay file: the
 # fontconfig package installs its own (empty) 51-local.conf at this same
 # path, and _make_custom_airootfs runs before pacstrap, so an overlay copy
