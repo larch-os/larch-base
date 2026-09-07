@@ -13,7 +13,7 @@ daily-driver machine, not something designed from scratch.
 
 - **Branding**: ISO metadata, boot menus (syslinux/systemd-boot/grub),
   splash image, `os-release`/`issue`, hostname, motd. Tagline: "Arch based
-  linux distro for lazy yet power users."
+  Linux distro for developers and engineers."
 - **Live user**: dedicated `larch` user (uid 1000), greetd autologin straight
   into a niri session, passwordless wheel sudo.
 - **Desktop**: niri (Wayland compositor) + noctalia v5 (official `extra`

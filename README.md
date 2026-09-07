@@ -4,7 +4,7 @@
 
 <h1 align="center">Larch</h1>
 
-<p align="center">Arch based linux distro for lazy yet power users.</p>
+<p align="center">Arch based Linux distro for developers and engineers.</p>
 
 <p align="center"><a href="https://larchos.vercel.app">larchos.vercel.app</a></p>
 
